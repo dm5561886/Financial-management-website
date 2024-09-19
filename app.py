@@ -37,15 +37,21 @@ static_folder = os.path.join(base_dir, 'static')
 if not os.path.exists(static_folder):
     os.makedirs(static_folder)
 
+# 設置登入頁面路由
+
 
 @app.route("/")
 def signin_page():
     return render_template("signin.html")
 
+# 設置註冊頁面路由
+
 
 @app.route("/register")
 def register():
     return render_template("register.html")
+
+# 接收註冊資訊路由
 
 
 @app.route("/signup", methods=["POST"])
@@ -70,6 +76,8 @@ def signup():
 
     return redirect("/")
 
+# 接收登入資訊路由
+
 
 @app.route("/signin", methods=["POST"])
 def signin():
@@ -87,6 +95,8 @@ def signin():
     session["u_name"] = result["u_name"]
     return redirect("/index")
 
+# 登出路由
+
 
 @app.route("/signout")
 def signout():
@@ -98,6 +108,8 @@ def signout():
 def error():
     message = request.args.get("msg", "發生錯誤，聯繫客服")
     return render_template("error.html", message=message)
+
+# 首頁
 
 
 @app.route("/index")
@@ -241,10 +253,14 @@ def index():
 
     return render_template("index.html", data=data)
 
+# 現金表單頁面
+
 
 @app.route("/cash")
 def cash():
     return render_template("cash.html")
+
+# 接收現金表單填寫資訊
 
 
 @app.route("/cash", methods=["POST"])
@@ -269,6 +285,8 @@ def submit_cash():
 
     return redirect("/index")
 
+# 刪除現金紀錄資訊
+
 
 @app.route("/del_cash", methods=["POST"])
 def del_cash():
@@ -285,10 +303,14 @@ def del_cash():
     )
     return redirect("/index")
 
+# 股票表單頁面
+
 
 @app.route("/stock")
 def stock():
     return render_template("stock.html")
+
+# 接收股票表單填寫資訊
 
 
 @app.route("/stock", methods=["POST"])
@@ -316,6 +338,8 @@ def submit_stock():
     )
 
     return redirect("/index")
+
+# 刪除股票紀錄資訊
 
 
 @app.route("/del_stock", methods=["POST"])
